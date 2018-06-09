@@ -19,18 +19,24 @@ const users = [
     {
         _id: userTwoId,
         email: 'luis@example.com',
-        password:'userTwoPass'
+        password:'userTwoPass',
+        tokens:[{
+            access:'x-auth',
+            token: jwt.sign({_id:userTwoId, access:'auth'},'abc123').toString(),
+        }]
     }
 ]
 
 const todos = [{
     _id: new ObjectID(),
-    text:'first test todo'
+    text:'first test todo',
+    _creator: userOneId,
 }, {
     _id: new ObjectID(),
     text:'second test todo',
     completed:true,
-    completedAt:333 
+    completedAt:333 ,
+    _creator: userTwoId,
 }];
 
 const pupulateTodos = (done) =>{
